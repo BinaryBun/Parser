@@ -1,3 +1,4 @@
+// ==server==
 #include <QCoreApplication>
 #include "Server.h"
 

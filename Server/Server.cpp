@@ -9,6 +9,7 @@ Server::Server() {
     } else {
         qDebug() << "Error";
     }
+    nextBlockSize = 0;
 }
 
 void Server::incomingConnection(qintptr socketDescriptor) {
@@ -19,6 +20,7 @@ void Server::incomingConnection(qintptr socketDescriptor) {
 
     Sockets.push_back(socket);
     qDebug() << "Connect client: " << socketDescriptor;
+    SendToClient("==CONNECT==");
 }
 
 void Server::slotReadyRead() {
@@ -26,9 +28,29 @@ void Server::slotReadyRead() {
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_6);
     if (in.status() == QDataStream::Ok) {
-        qDebug() << "ready..";
-        QString str;
-        qDebug() << str;
+        qDebug() << "read..";
+        /*QString str;
+        in >> str;
+        //qDebug() << "Client message: " << str;
+        SendToClient(str);*/
+        while (true) {
+            if (nextBlockSize == 0) {
+                if (socket->bytesAvailable() < 2) {
+                    break;
+                }
+                in >> nextBlockSize;
+            }
+            if (socket->bytesAvailable() < nextBlockSize) {
+                 break;
+            }
+
+            QString str;
+            in >> str;
+            nextBlockSize = 0;
+            SendToClient(str);
+            break;
+        }
+
     } else {
         qDebug() << "DataStream error";
     }
@@ -38,6 +60,11 @@ void Server::SendToClient(QString str) {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_6);
-    out << str;
-    socket->write(Data);
+    out << quint16(0) << str;  // size pac
+    out.device()->seek(0);
+    out << quint16(Data.size() - sizeof (quint16));
+    socket->write(Data);  // from last client
+    /*for (int i = 0; i < Sockets.size(); i++) {
+        Sockets[i]->write(Data);
+    }*/
 }
