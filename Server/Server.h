@@ -4,7 +4,7 @@
 #include <QTcpSocket>
 #include <QVector>
 
-class Server : QTcpServer  // main server class
+class Server : public QTcpServer  // main server class
 {
     Q_OBJECT
 
@@ -15,7 +15,7 @@ public:
 private:
     QVector <QTcpSocket*> Sockets;  // list of sockets
     QByteArray Data;  // array of sending data
-    void SendToClient();
+    void SendToClient(QString str);
 
 public slots:
     void incomingConnection(qintptr socketDescriptor);
