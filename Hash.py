@@ -3,9 +3,9 @@
 	+--------+              +--------+            +--------+                                    +--------+ 
 	| Client | =[connect]=> | Server | =[token]=> | Client | =[login, md5(token+md5(passwd))]=> | Server | 
 	+--------+              +--------+            +--------+                                    +--------+ 
-												  | login  |
-												  | passwd |
-												  +--------+	
+	                                              | login  |
+	                                              | passwd |
+	                                              +--------+	
 
 	!!Данные можно перехватить на этапах 2 и 3."""
 import hashlib
@@ -59,7 +59,7 @@ def main():
 	hack_token = get_from_server()  # (2)
 	print(f"Hack step 2: '{hack_token}'")
 	hack_data = send_data  # hack step (3)
-	print(f"Hack step 2: {hack_data}")
+	print(f"Hack step 3: {hack_data}")
 	server(send_data)  # (3)
 
 
