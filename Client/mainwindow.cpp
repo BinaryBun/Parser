@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 const QString serv_addr = "127.0.0.1";
 const int serv_port = 2323;
+QString token;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
     nextBlockSize = 0;
+
+    socket->connectToHost(serv_addr, serv_port);
 }
 
 MainWindow::~MainWindow()
@@ -22,7 +25,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    socket->connectToHost(serv_addr, serv_port);
+    // login
+    QString login = ui->lineEdit_2->text();
+    QString password = md5(ui->lineEdit_3->text());
+    password = md5(token + password);
+    ui->textBrowser->append(QString("You: \tLogin: %1").arg(login));
+    ui->textBrowser->append(QString("You: \tPasswd: %1").arg(password));
+    ui->textBrowser->append(QString("You: \tToken: %1").arg(token));
+    //clear lineEdit
+    ui->lineEdit_2->clear();
+    ui->lineEdit_3->clear();
+    SendToServer(QString("%1|%2").arg(login, password));
 }
 
 void MainWindow::SendToServer(QString str)
@@ -36,15 +49,17 @@ void MainWindow::SendToServer(QString str)
     socket->write(Data);
 }
 
+QString MainWindow::md5(QString str)
+{
+    QByteArray str_arr = str.toUtf8();
+    return QString(QCryptographicHash::hash((str_arr),QCryptographicHash::Md5).toHex());
+}
+
 void MainWindow::slotReadyRead()
 {
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_6);
     if (in.status() == QDataStream::Ok) {
-        /*QString str;
-        in >> str;
-        //qDebug() << str;
-        ui->textBrowser->append(QString("Server: %1").arg(str)); */
         while (true) {
             if (nextBlockSize == 0) {
                 if (socket->bytesAvailable() < 2) {
@@ -60,6 +75,9 @@ void MainWindow::slotReadyRead()
             in >> str;
             nextBlockSize = 0;
             ui->textBrowser->append(QString("Server: %1").arg(str));
+            if (str.count(">> Token: ") == 1) {
+                token = str.replace(0, 10, "");
+            }
             break;
         }
 
@@ -67,21 +85,3 @@ void MainWindow::slotReadyRead()
         ui->textBrowser->append("==DataStream error==");
     }
 }
-
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    //qDebug() << ui->lineEdit->text();
-    SendToServer(ui->lineEdit->text());
-    ui->textBrowser->append(QString("You: %1").arg(ui->lineEdit->text()));
-    ui->lineEdit->clear();
-}
-
-
-void MainWindow::on_lineEdit_returnPressed()
-{
-    SendToServer(ui->lineEdit->text());
-    ui->textBrowser->append(QString("You: %1").arg(ui->lineEdit->text()));
-    ui->lineEdit->clear();
-}
-

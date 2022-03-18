@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTcpSocket>
+#include <QCryptographicHash>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,8 +19,6 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-    void on_lineEdit_returnPressed();
 
 private:
     Ui::MainWindow *ui;
@@ -27,6 +26,7 @@ private:
     QByteArray Data;
     void SendToServer(QString str);
     quint16 nextBlockSize;
+    QString md5(QString str);
 
 public slots:
     void slotReadyRead();

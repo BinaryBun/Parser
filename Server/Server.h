@@ -3,6 +3,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
+#include <QCryptographicHash>
 
 class Server : public QTcpServer  // main server class
 {
@@ -17,6 +18,8 @@ private:
     QByteArray Data;  // array of sending data
     void SendToClient(QString str);
     quint16 nextBlockSize;
+    QString get_token();
+    QString md5(QString str);
 
 public slots:
     void incomingConnection(qintptr socketDescriptor);

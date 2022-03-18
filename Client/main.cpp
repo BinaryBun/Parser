@@ -1,4 +1,4 @@
-// ==client==
+// ==client ++==
 #include "mainwindow.h"
 #include <QApplication>
 
