@@ -1,2 +1,2 @@
-# Parser da
+# Parser
 - set QMap <id, token>
