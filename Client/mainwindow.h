@@ -30,7 +30,7 @@ private:
     quint16 nextBlockSize;
     QString token;
 
-    Form form;
+    Form form_1;
 
 public slots:
     void slotReadyRead();

@@ -75,9 +75,9 @@ void Server::slotReadyRead() {
             if (str.count('|') == 1) {
                 //|||||
                 if (md5(token + logins[str.split('|')[0]]) == str.split('|')[1]) {
-                    SendToClient("True | token: " + token);
+                    SendToClient("True");
                 } else {
-                    SendToClient("False | token: " + token);
+                    SendToClient("False");
                 }
 
             } else {

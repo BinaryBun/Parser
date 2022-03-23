@@ -78,6 +78,9 @@ void MainWindow::slotReadyRead()
             if (str.count(">> Token: ") == 1) {
                 token = str.replace(0, 10, "");
                 qDebug() << QString("Token: %1").arg(token);
+            } else if (str == "True") {
+                form_1.show();
+                close();
             }
             break;
         }
