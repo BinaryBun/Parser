@@ -4,7 +4,6 @@
 static const QMap <QString, QString> logins = {
     {"maxim", "b2a8a7731bb664364d1f43de25f44c4f"}};
 const int port = 2323;
-QString token = "";
 
 
 Server::Server() {
@@ -24,9 +23,11 @@ void Server::incomingConnection(qintptr socketDescriptor) {
 
     Sockets.push_back(socket);
     qDebug() << "Connect client: " << socketDescriptor;
-    // toket
-    token = get_token();
-    SendToClient(QString(">> Token: %1").arg(token));
+    // token
+    // --socketDescriptor
+    QString local_token = get_token();
+    tokens.insert(socketDescriptor, local_token);
+    SendToClient(QString(">> Token: %1").arg(local_token));
 
 }
 
@@ -51,14 +52,11 @@ QString Server::md5(QString str)
 
 void Server::slotReadyRead() {
     socket = (QTcpSocket*)sender();  // get client socket
+    QString token = tokens[socket->socketDescriptor()];  // get token
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_6);
     if (in.status() == QDataStream::Ok) {
         qDebug() << "read..";
-        /*QString str;
-        in >> str;
-        //qDebug() << "Client message: " << str;
-        SendToClient(str);*/
         while (true) {
             if (nextBlockSize == 0) {
                 if (socket->bytesAvailable() < 2) {
@@ -75,10 +73,11 @@ void Server::slotReadyRead() {
             nextBlockSize = 0;
             //SendToClient(QString(">> Token: %1\n\tMessage: %2").arg(token, str));
             if (str.count('|') == 1) {
+                //|||||
                 if (md5(token + logins[str.split('|')[0]]) == str.split('|')[1]) {
-                    SendToClient("True");
+                    SendToClient("True | token: " + token);
                 } else {
-                    SendToClient("False");
+                    SendToClient("False | token: " + token);
                 }
 
             } else {

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTcpSocket>
 #include <QCryptographicHash>
+#include "form.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,12 +22,15 @@ private slots:
     void on_pushButton_clicked();
 
 private:
+    void SendToServer(QString str);
+    QString md5(QString str);
     Ui::MainWindow *ui;
     QTcpSocket *socket;
     QByteArray Data;
-    void SendToServer(QString str);
     quint16 nextBlockSize;
-    QString md5(QString str);
+    QString token;
+
+    Form form;
 
 public slots:
     void slotReadyRead();

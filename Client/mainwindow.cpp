@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 const QString serv_addr = "127.0.0.1";
 const int serv_port = 2323;
-QString token;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -28,10 +27,11 @@ void MainWindow::on_pushButton_clicked()
     // login
     QString login = ui->lineEdit_2->text();
     QString password = md5(ui->lineEdit_3->text());
-    password = md5(token + password);
-    ui->textBrowser->append(QString("You: \tLogin: %1").arg(login));
     ui->textBrowser->append(QString("You: \tPasswd: %1").arg(password));
-    ui->textBrowser->append(QString("You: \tToken: %1").arg(token));
+    password = md5(this->token + password);
+    ui->textBrowser->append(QString("You: \tLogin: %1").arg(login));
+    ui->textBrowser->append(QString("You: \tPasswd(md5): %1").arg(password));
+    ui->textBrowser->append(QString("You: \tToken: %1").arg(this->token));
     //clear lineEdit
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
@@ -77,6 +77,7 @@ void MainWindow::slotReadyRead()
             ui->textBrowser->append(QString("Server: %1").arg(str));
             if (str.count(">> Token: ") == 1) {
                 token = str.replace(0, 10, "");
+                qDebug() << QString("Token: %1").arg(token);
             }
             break;
         }

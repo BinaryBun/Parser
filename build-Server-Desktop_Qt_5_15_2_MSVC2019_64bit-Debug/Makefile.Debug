@@ -250,9 +250,11 @@ debug\moc_Server.cpp: ..\Server\Server.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\QTcpSocket \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\qtcpsocket.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QCryptographicHash \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcryptographichash.h \
 		debug\moc_predefs.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\bin\moc.exe
-	C:\Qt\5.15.2\msvc2019_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include C:/YP/client_server/build-Server-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug/moc_predefs.h -IC:/Qt/5.15.2/msvc2019_64/mkspecs/win32-msvc -IC:/YP/client_server/Server -IC:/Qt/5.15.2/msvc2019_64/include -IC:/Qt/5.15.2/msvc2019_64/include/QtNetwork -IC:/Qt/5.15.2/msvc2019_64/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt" ..\Server\Server.h -o debug\moc_Server.cpp
+	C:\Qt\5.15.2\msvc2019_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include C:/YP/Parser/build-Server-Desktop_Qt_5_15_2_MSVC2019_64bit-Debug/debug/moc_predefs.h -IC:/Qt/5.15.2/msvc2019_64/mkspecs/win32-msvc -IC:/YP/Parser/Server -IC:/Qt/5.15.2/msvc2019_64/include -IC:/Qt/5.15.2/msvc2019_64/include/QtNetwork -IC:/Qt/5.15.2/msvc2019_64/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt" ..\Server\Server.h -o debug\moc_Server.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -344,8 +346,11 @@ debug\Server.obj: ..\Server\Server.cpp ..\Server\Server.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\QTcpSocket \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\qtcpsocket.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QCryptographicHash \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcryptographichash.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QDataStream \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdatastream.h
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdatastream.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QMap
 
 debug\main.obj: ..\Server\main.cpp ..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QCoreApplication \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcoreapplication.h \
@@ -423,7 +428,9 @@ debug\main.obj: ..\Server\main.cpp ..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\qhostaddress.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\QTcpSocket \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtNetwork\qtcpsocket.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QCryptographicHash \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcryptographichash.h
 
 debug\moc_Server.obj: debug\moc_Server.cpp 
 

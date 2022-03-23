@@ -20,6 +20,8 @@ private:
     quint16 nextBlockSize;
     QString get_token();
     QString md5(QString str);
+    QMap <qintptr, QString> tokens;
+
 
 public slots:
     void incomingConnection(qintptr socketDescriptor);
