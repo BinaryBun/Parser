@@ -2,7 +2,8 @@
 #include <QDataStream>
 #include <QMap>
 static const QMap <QString, QString> logins = {
-    {"maxim", "b2a8a7731bb664364d1f43de25f44c4f"}};
+    {"maxim", "b2a8a7731bb664364d1f43de25f44c4f"},  // some_passwd
+    {"kira", "76a2173be6393254e72ffa4d6df1030a"}};  // passwd
 const int port = 2323;
 
 

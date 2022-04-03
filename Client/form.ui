@@ -13,14 +13,23 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>130</y>
-     <width>113</width>
-     <height>24</height>
+     <x>150</x>
+     <y>160</y>
+     <width>121</width>
+     <height>61</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>Pass</string>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="indent">
+    <number>-1</number>
    </property>
   </widget>
  </widget>

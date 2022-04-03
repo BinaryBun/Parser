@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -19,16 +19,18 @@ QT_BEGIN_NAMESPACE
 class Ui_Form
 {
 public:
-    QLineEdit *lineEdit;
+    QLabel *label;
 
     void setupUi(QWidget *Form)
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QString::fromUtf8("Form"));
         Form->resize(417, 318);
-        lineEdit = new QLineEdit(Form);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(100, 130, 113, 24));
+        label = new QLabel(Form);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(150, 160, 121, 61));
+        label->setMargin(0);
+        label->setIndent(-1);
 
         retranslateUi(Form);
 
@@ -38,6 +40,7 @@ public:
     void retranslateUi(QWidget *Form)
     {
         Form->setWindowTitle(QCoreApplication::translate("Form", "Form", nullptr));
+        label->setText(QCoreApplication::translate("Form", "Pass", nullptr));
     } // retranslateUi
 
 };

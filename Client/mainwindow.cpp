@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    this->setFixedSize(QSize(321, 394));
+    //setWindowFlags(Qt::Dialog);
     ui->setupUi(this);
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
@@ -27,11 +29,13 @@ void MainWindow::on_pushButton_clicked()
     // login
     QString login = ui->lineEdit_2->text();
     QString password = md5(ui->lineEdit_3->text());
-    ui->textBrowser->append(QString("You: \tPasswd: %1").arg(password));
+    qDebug() << (QString("You: \tPasswd: %1").arg(password));
     password = md5(this->token + password);
-    ui->textBrowser->append(QString("You: \tLogin: %1").arg(login));
-    ui->textBrowser->append(QString("You: \tPasswd(md5): %1").arg(password));
-    ui->textBrowser->append(QString("You: \tToken: %1").arg(this->token));
+    qDebug() << (QString("You: \tLogin: %1").arg(login));
+    qDebug() << (QString("You: \tPasswd(md5): %1").arg(password));
+    qDebug() << (QString("You: \tToken: %1").arg(this->token));
+    // change form
+
     //clear lineEdit
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
@@ -74,18 +78,26 @@ void MainWindow::slotReadyRead()
             QString str;
             in >> str;
             nextBlockSize = 0;
-            ui->textBrowser->append(QString("Server: %1").arg(str));
+            qDebug() << (QString("Server: %1").arg(str));
             if (str.count(">> Token: ") == 1) {
                 token = str.replace(0, 10, "");
                 qDebug() << QString("Token: %1").arg(token);
             } else if (str == "True") {
                 form_1.show();
                 close();
+            } else if (str == "False") {
+                // error
+                QMessageBox msgBox;
+                msgBox.setText("Внимательно прочтите!");
+                msgBox.setStandardButtons(QMessageBox::Abort);
+                msgBox.exec();
+                //QMessageBox::information(this, "Внимание","Введён неверный логин или пароль");
+                //QMessageBox::warning(this, "Внимание","Введён неверный логин или пароль");
             }
             break;
         }
 
     } else {
-        ui->textBrowser->append("==DataStream error==");
+        qDebug() << ("==DataStream error==");
     }
 }

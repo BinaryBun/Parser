@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTcpSocket>
 #include <QCryptographicHash>
+#include <QMessageBox>
 #include "form.h"
 
 QT_BEGIN_NAMESPACE
