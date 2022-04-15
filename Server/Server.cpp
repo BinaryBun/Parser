@@ -1,7 +1,4 @@
 #include "Server.h"
-#include <QDataStream>
-#include <QMap>
-#include <QSqlQuery>
 const int port = 2323;
 
 

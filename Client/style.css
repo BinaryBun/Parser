@@ -62,6 +62,6 @@ QLabel#label_5 {
 }
 
 QLabel#label_6 {
-    margin-left: 60%;
+    /*margin-left: 60%;*/
     font-size: 12pt;
 }

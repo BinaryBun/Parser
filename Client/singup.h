@@ -1,8 +1,12 @@
-#ifndef SINGUP_H
+﻿#ifndef SINGUP_H
 #define SINGUP_H
 
 #include <QMainWindow>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QCryptographicHash>
+#include <QDebug>
 #include "mainwin_1.h"
 
 namespace Ui {
@@ -21,9 +25,11 @@ private slots:
     void on_pushButton_clicked();
 
 private:
+    QSqlDatabase db;
     Ui::Singup *ui;
     MainWin_1 form_1;
     void recod_acc();
+    bool is_not_login(QString login);
     QString md5(QString str);
 
 };
