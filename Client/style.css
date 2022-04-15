@@ -6,6 +6,7 @@ QPushButton {
     font-size: 10pt;
     color: white;
 }
+
 QPushButton:hover {
     background-color: #56d364;
 }
@@ -36,11 +37,16 @@ QMainWindow {
     background: #0d1117;
 }
 
-QLabel {
+QLabel{
     color: white;
     font-size: 10pt;
 }
 
 QLabel#label_3 {
+    font-size: 14pt;
+}
+
+QLabel#label_5 {
+    color: black;
     font-size: 14pt;
 }

@@ -840,12 +840,7 @@ release\mainwindow.obj: ..\Client\mainwindow.cpp ..\Client\mainwindow.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qpushbutton.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qabstractbutton.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QStatusBar \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qstatusbar.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QTextBrowser \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtextbrowser.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtextedit.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qabstractscrollarea.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextdocument.h
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qstatusbar.h
 
 release\qrc_qrc.obj: release\qrc_qrc.cpp 
 

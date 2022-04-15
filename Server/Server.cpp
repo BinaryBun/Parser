@@ -1,14 +1,11 @@
 #include "Server.h"
 #include <QDataStream>
 #include <QMap>
-static const QMap <QString, QString> logins = {
-    {"maxim", "b2a8a7731bb664364d1f43de25f44c4f"},  // some_passwd
-    {"kira", "76a2173be6393254e72ffa4d6df1030a"}};  // passwd
+#include <QSqlQuery>
 const int port = 2323;
 
 
 Server::Server() {
-    Server::test_connect_DB();
     if (this->listen(QHostAddress::Any, port)) {
         qDebug() << QString("Start server {port: %1}").arg(port);
     } else {
@@ -17,15 +14,26 @@ Server::Server() {
     nextBlockSize = 0;
 }
 
-void Server::test_connect_DB() {
+QString Server::get_passwd(QString login) {
+    // connect 2 database
     db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("127.0.0.1");
     db.setDatabaseName("parser");
     db.setUserName("root");
     db.setPassword("binarybun");
+    // try open
     if (!db.open()) {
         qDebug() << db.lastError().text();
+    } else {
+        //qDebug() << "Connect";
+        QSqlQuery query = QSqlQuery(db);
+        if (query.exec(QString("SELECT passw FROM passwdords WHERE login='%1';").arg(login))) {
+            while (query.next())
+                //qDebug() << query.value("passw").toString();
+                return query.value("passw").toString();
+        }
     }
+    return "(╯°□°）╯︵ ┻━┻";
 }
 
 void Server::incomingConnection(qintptr socketDescriptor) {
@@ -86,7 +94,8 @@ void Server::slotReadyRead() {
             nextBlockSize = 0;
             //SendToClient(QString(">> Token: %1\n\tMessage: %2").arg(token, str));
             if (str.count('|') == 1) {
-                if (md5(token + logins[str.split('|')[0]]) == str.split('|')[1]) {
+                QString passwd = get_passwd(str.split('|')[0]);
+                if (md5(token + passwd) == str.split('|')[1]) {
                     SendToClient("True");
                 } else {
                     SendToClient("False");
