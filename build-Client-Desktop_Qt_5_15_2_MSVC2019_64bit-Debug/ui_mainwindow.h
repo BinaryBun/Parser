@@ -36,6 +36,8 @@ public:
     QPushButton *pushButton_2;
     QGroupBox *groupBox;
     QGroupBox *groupBox_2;
+    QGroupBox *groupBox_3;
+    QLabel *label_5;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -45,7 +47,7 @@ public:
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->setWindowModality(Qt::ApplicationModal);
         MainWindow->setEnabled(true);
-        MainWindow->resize(321, 424);
+        MainWindow->resize(321, 518);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -94,6 +96,15 @@ public:
         groupBox_2 = new QGroupBox(centralwidget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setGeometry(QRect(20, 310, 281, 61));
+        groupBox_3 = new QGroupBox(centralwidget);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setGeometry(QRect(20, 380, 281, 51));
+        label_5 = new QLabel(groupBox_3);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(0, 0, 281, 51));
+        QFont font1;
+        font1.setPointSize(12);
+        label_5->setFont(font1);
         MainWindow->setCentralWidget(centralwidget);
         groupBox->raise();
         groupBox_2->raise();
@@ -105,6 +116,7 @@ public:
         label_3->raise();
         label_4->raise();
         pushButton_2->raise();
+        groupBox_3->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 321, 21));
@@ -129,6 +141,8 @@ public:
         pushButton_2->setText(QCoreApplication::translate("MainWindow", " Create an account", nullptr));
         groupBox->setTitle(QString());
         groupBox_2->setTitle(QString());
+        groupBox_3->setTitle(QString());
+        label_5->setText(QCoreApplication::translate("MainWindow", "Incorrect username or password", nullptr));
     } // retranslateUi
 
 };

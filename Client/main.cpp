@@ -12,8 +12,7 @@ int main(int argc, char *argv[])
     a.setStyleSheet(file.readAll());
 
     MainWindow w1;
-    //MainWindow w2;
+
     w1.show();
-    //w2.show();
     return a.exec();
 }

@@ -22,6 +22,12 @@ QGroupBox#groupBox_2 {
      border: 1px solid #30363d;
 }
 
+QGroupBox#groupBox_3 {
+     border-radius: 8px;
+     background: #372327;
+     border: 1px solid #853535;
+}
+
 QLineEdit {
     color: white;
     border-radius: 4px;
@@ -37,6 +43,10 @@ QMainWindow {
     background: #0d1117;
 }
 
+QFrom {
+    background: #0d1117;
+}
+
 QLabel{
     color: white;
     font-size: 10pt;
@@ -47,6 +57,11 @@ QLabel#label_3 {
 }
 
 QLabel#label_5 {
-    color: black;
-    font-size: 14pt;
+    margin-left: 20%;
+    font-size: 12pt;
+}
+
+QLabel#label_6 {
+    margin-left: 60%;
+    font-size: 12pt;
 }

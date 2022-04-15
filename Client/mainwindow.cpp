@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 const QString serv_addr = "127.0.0.1";
 const int serv_port = 2323;
 
@@ -87,12 +88,7 @@ void MainWindow::slotReadyRead()
                 close();
             } else if (str == "False") {
                 // error
-                QMessageBox msgBox;
-                msgBox.setText("Внимательно прочтите!");
-                msgBox.setStandardButtons(QMessageBox::Abort);
-                msgBox.exec();
-                //QMessageBox::information(this, "Внимание","Введён неверный логин или пароль");
-                //QMessageBox::warning(this, "Внимание","Введён неверный логин или пароль");
+                this->setFixedSize(QSize(321, 452));
             }
             break;
         }
@@ -101,3 +97,10 @@ void MainWindow::slotReadyRead()
         qDebug() << ("==DataStream error==");
     }
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    sin_1.show();
+    close();
+}
+

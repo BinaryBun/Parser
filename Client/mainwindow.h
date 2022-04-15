@@ -5,7 +5,8 @@
 #include <QTcpSocket>
 #include <QCryptographicHash>
 #include <QMessageBox>
-#include "form.h"
+#include "mainwin_1.h"
+#include "singup.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
 
 private:
     void SendToServer(QString str);
@@ -31,7 +33,8 @@ private:
     quint16 nextBlockSize;
     QString token;
 
-    Form form_1;
+    MainWin_1 form_1;
+    Singup sin_1;
 
 public slots:
     void slotReadyRead();
