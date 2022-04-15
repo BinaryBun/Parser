@@ -2,6 +2,7 @@
 #define SINGUP_H
 
 #include <QMainWindow>
+#include <QCryptographicHash>
 #include "mainwin_1.h"
 
 namespace Ui {
@@ -15,6 +16,9 @@ class Singup : public QMainWindow
 public:
     explicit Singup(QWidget *parent = nullptr);
     ~Singup();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::Singup *ui;

@@ -51,7 +51,7 @@ public:
         lineEdit_3->setGeometry(QRect(50, 200, 221, 24));
         lineEdit_2 = new QLineEdit(centralwidget);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setGeometry(QRect(50, 120, 221, 24));
+        lineEdit_2->setGeometry(QRect(50, 240, 221, 24));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(50, 90, 101, 16));
@@ -60,7 +60,7 @@ public:
         groupBox->setGeometry(QRect(20, 70, 281, 281));
         lineEdit = new QLineEdit(groupBox);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(30, 170, 221, 24));
+        lineEdit->setGeometry(QRect(30, 50, 221, 24));
         pushButton = new QPushButton(groupBox);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(30, 220, 221, 31));
