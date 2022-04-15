@@ -1,9 +1,11 @@
 #ifndef SERVER_H
 #define SERVER_H
+#include <QSqlError>
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
 #include <QCryptographicHash>
+#include <QSqlDatabase>
 
 class Server : public QTcpServer  // main server class
 {
@@ -14,6 +16,7 @@ public:
     QTcpSocket *socket;  // create socket
 
 private:
+    void test_connect_DB();
     QVector <QTcpSocket*> Sockets;  // list of sockets
     QByteArray Data;  // array of sending data
     void SendToClient(QString str);
@@ -21,6 +24,8 @@ private:
     QString get_token();
     QString md5(QString str);
     QMap <qintptr, QString> tokens;
+    QSqlDatabase db;
+
 
 
 public slots:

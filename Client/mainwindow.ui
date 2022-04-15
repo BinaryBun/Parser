@@ -148,7 +148,7 @@
      </rect>
     </property>
     <property name="text">
-     <string> Create an account.</string>
+     <string> Create an account</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">

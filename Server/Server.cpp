@@ -8,12 +8,24 @@ const int port = 2323;
 
 
 Server::Server() {
+    Server::test_connect_DB();
     if (this->listen(QHostAddress::Any, port)) {
         qDebug() << QString("Start server {port: %1}").arg(port);
     } else {
         qDebug() << "Error";
     }
     nextBlockSize = 0;
+}
+
+void Server::test_connect_DB() {
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("127.0.0.1");
+    db.setDatabaseName("parser");
+    db.setUserName("root");
+    db.setPassword("binarybun");
+    if (!db.open()) {
+        qDebug() << db.lastError().text();
+    }
 }
 
 void Server::incomingConnection(qintptr socketDescriptor) {
@@ -74,7 +86,6 @@ void Server::slotReadyRead() {
             nextBlockSize = 0;
             //SendToClient(QString(">> Token: %1\n\tMessage: %2").arg(token, str));
             if (str.count('|') == 1) {
-                //|||||
                 if (md5(token + logins[str.split('|')[0]]) == str.split('|')[1]) {
                     SendToClient("True");
                 } else {

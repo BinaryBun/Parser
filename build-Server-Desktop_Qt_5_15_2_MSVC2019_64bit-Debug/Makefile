@@ -259,6 +259,7 @@ Makefile: ..\Server\Server.pro ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\qt_config.prf \
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf \
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\exclusive_builds.prf \
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\common\msvc-version.conf \
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\toolchain.prf \
@@ -283,10 +284,11 @@ Makefile: ..\Server\Server.pro ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\lex.prf \
 		..\Server\Server.pro \
 		..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Network.prl \
+		..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.prl \
 		..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Core.prl \
-		.qmake.stash \
 		..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\build_pass.prf \
 		..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.prl \
+		..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Sqld.prl \
 		..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Cored.prl
 	$(QMAKE) -o Makefile ..\Server\Server.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\spec_pre.prf:
@@ -464,6 +466,7 @@ Makefile: ..\Server\Server.pro ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\qt_config.prf:
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf:
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\spec_post.prf:
+.qmake.stash:
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\exclusive_builds.prf:
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\common\msvc-version.conf:
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\toolchain.prf:
@@ -488,10 +491,11 @@ Makefile: ..\Server\Server.pro ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\win32-msvc
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\lex.prf:
 ..\Server\Server.pro:
 ..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Network.prl:
+..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Sql.prl:
 ..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Core.prl:
-.qmake.stash:
 ..\..\..\Qt\5.15.2\msvc2019_64\mkspecs\features\build_pass.prf:
 ..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Networkd.prl:
+..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Sqld.prl:
 ..\..\..\Qt\5.15.2\msvc2019_64\lib\Qt5Cored.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\Server\Server.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"

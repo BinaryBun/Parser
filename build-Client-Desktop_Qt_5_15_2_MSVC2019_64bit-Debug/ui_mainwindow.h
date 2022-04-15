@@ -126,7 +126,7 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Password", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Sign in to Parser", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "New to Parser?", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", " Create an account.", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", " Create an account", nullptr));
         groupBox->setTitle(QString());
         groupBox_2->setTitle(QString());
     } // retranslateUi
