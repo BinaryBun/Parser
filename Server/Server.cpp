@@ -68,6 +68,30 @@ QString Server::md5(QString str)
     return QString(QCryptographicHash::hash((str_arr),QCryptographicHash::Md5).toHex());
 }
 
+bool Server::is_not_login(QString login)
+{
+    // connect 2 database
+
+    db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("127.0.0.1");
+    db.setDatabaseName("parser");
+    db.setUserName("root");
+    db.setPassword("binarybun");
+    // try open
+    if (!db.open()) {
+        qDebug() << db.lastError().text();
+    } else {
+        //qDebug() << "Connect";
+        QSqlQuery query = QSqlQuery(db);
+        if (query.exec(QString("SELECT passw FROM passwdords WHERE login='%1';").arg(login))) {
+            while (query.next())
+                //qDebug() << query.value("passw").toString();
+                return false;
+        }
+    }
+    return true;
+}
+
 void Server::slotReadyRead() {
     socket = (QTcpSocket*)sender();  // get client socket
     QString token = tokens[socket->socketDescriptor()];  // get token
@@ -90,12 +114,38 @@ void Server::slotReadyRead() {
             in >> str;
             nextBlockSize = 0;
             //SendToClient(QString(">> Token: %1\n\tMessage: %2").arg(token, str));
-            if (str.count('|') == 1) {
+            // read message
+            //qDebug() << str;
+            if (str.left(3) == "cnu") {
+                QString passwd = str.mid(3, 32);
+                QString login = str.right(str.length()-3-32);
+                qDebug() << passwd << ' ' << login;
+                if (is_not_login(login)) {
+                    db = QSqlDatabase::addDatabase("QMYSQL");
+                    db.setHostName("127.0.0.1");
+                    db.setDatabaseName("parser");
+                    db.setUserName("root");
+                    db.setPassword("binarybun");
+                    // try open
+                    if (!db.open()) {
+                        qDebug() << db.lastError().text();
+                    } else {
+                        //qDebug() << "Connect";
+                        QSqlQuery query = QSqlQuery(db);
+                        query.exec(QString("insert into passwdords values ('%1', '%2')").arg(login, passwd));
+                        SendToClient("cnuTrue");
+                    }
+                } else {
+                    SendToClient("cnuFalse");
+                }
+
+            } else if (str.left(3) == "tlg") {
+                str = str.right(str.length()-3);
                 QString passwd = get_passwd(str.split('|')[0]);
                 if (md5(token + passwd) == str.split('|')[1]) {
-                    SendToClient("True");
+                    SendToClient("tlgTrue");
                 } else {
-                    SendToClient("False");
+                    SendToClient("tlgFalse");
                 }
 
             } else {

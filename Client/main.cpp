@@ -16,3 +16,10 @@ int main(int argc, char *argv[])
     w1.show();
     return a.exec();
 }
+
+/*
+    pkjname:
+        cnu: check new user
+        tlg: try login
+
+*/

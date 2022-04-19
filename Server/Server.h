@@ -29,6 +29,7 @@ private:
     QString md5(QString str);
     QMap <qintptr, QString> tokens;
     QSqlDatabase db;
+    bool is_not_login(QString login);
 
 
 

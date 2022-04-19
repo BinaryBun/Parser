@@ -8,6 +8,7 @@ Singup::Singup(QWidget *parent) :
 {
     this->setFixedSize(QSize(321, 370));
     ui->setupUi(this);
+
 }
 
 QString Singup::md5(QString str)
@@ -26,27 +27,7 @@ void Singup::on_pushButton_clicked()
     if (ui->lineEdit_2->text() == ui->lineEdit_3->text()) {
         QString login = ui->lineEdit->text();
         QString password = md5(ui->lineEdit_2->text());
-        if (is_not_login(ui->lineEdit->text())) {
-            db = QSqlDatabase::addDatabase("QMYSQL");
-            db.setHostName("127.0.0.1");
-            db.setDatabaseName("parser");
-            db.setUserName("root");
-            db.setPassword("binarybun");
-            // try open
-            if (!db.open()) {
-                qDebug() << db.lastError().text();
-            } else {
-                //qDebug() << "Connect";
-                QSqlQuery query = QSqlQuery(db);
-                query.exec(QString("insert into passwdords values ('%1', '%2')").arg(login, password));
-                form_1.show();
-                close();
-            }
-        } else {
-            ui->label_6->setText("This user exists");
-            ui->label_6->setAlignment(Qt::AlignCenter);
-            this->setFixedSize(QSize(321, 442));
-        }
+        emit send_to_main(login, password);
     } else {
         ui->label_6->setText("Login incorrect");
         ui->label_6->setAlignment(Qt::AlignCenter);
@@ -54,26 +35,14 @@ void Singup::on_pushButton_clicked()
     }
 }
 
-bool Singup::is_not_login(QString login)
+void Singup::read_answ(QString answer)
 {
-    // connect 2 database
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
-    db.setDatabaseName("parser");
-    db.setUserName("root");
-    db.setPassword("binarybun");
-    // try open
-    if (!db.open()) {
-        qDebug() << db.lastError().text();
+    if (answer == "cnuTrue") {
+        form_1.show();
+        close();
     } else {
-        //qDebug() << "Connect";
-        QSqlQuery query = QSqlQuery(db);
-        if (query.exec(QString("SELECT passw FROM passwdords WHERE login='%1';").arg(login))) {
-            while (query.next())
-                //qDebug() << query.value("passw").toString();
-                return false;
-        }
+        ui->label_6->setText("This user exists");
+        ui->label_6->setAlignment(Qt::AlignCenter);
+        this->setFixedSize(QSize(321, 442));
     }
-    return true;
 }
-

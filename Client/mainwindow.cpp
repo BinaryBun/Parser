@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const QString serv_addr = "127.0.0.1";
+static QString serv_addr = "127.0.0.1";
 const int serv_port = 2323;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
+    connect(sin_1, SIGNAL(send_to_main(QString, QString)), this, SLOT(recieveData(QString, QString)));
+    connect(this, SIGNAL(change_singup(QString)), sin_1, SLOT(read_answ(QString)));
     nextBlockSize = 0;
 
     socket->connectToHost(serv_addr, serv_port);
@@ -21,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    qDebug() << "END MAIN";
     delete ui;
 }
 
@@ -40,11 +43,12 @@ void MainWindow::on_pushButton_clicked()
     //clear lineEdit
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
-    SendToServer(QString("%1|%2").arg(login, password));
+    SendToServer(QString("tlg%1|%2").arg(login, password));
 }
 
 void MainWindow::SendToServer(QString str)
 {
+    qDebug() << "send";
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_6);
@@ -58,6 +62,15 @@ QString MainWindow::md5(QString str)
 {
     QByteArray str_arr = str.toUtf8();
     return QString(QCryptographicHash::hash((str_arr),QCryptographicHash::Md5).toHex());
+}
+
+void MainWindow::recieveData(QString login, QString passwd)
+{
+    // принимает данные с сигнала
+    qDebug() << QString("Login: %1 -- Password: %2").arg(login, passwd);
+    // const_key + const_hash + login
+    SendToServer("cnu"+passwd+login);
+
 }
 
 void MainWindow::slotReadyRead()
@@ -83,12 +96,14 @@ void MainWindow::slotReadyRead()
             if (str.count(">> Token: ") == 1) {
                 token = str.replace(0, 10, "");
                 qDebug() << QString("Token: %1").arg(token);
-            } else if (str == "True") {
+            } else if (str == "tlgTrue") {
                 form_1.show();
                 close();
-            } else if (str == "False") {
+            } else if (str == "tlgFalse") {
                 // error
                 this->setFixedSize(QSize(321, 452));
+            } else if (str == "cnuFalse" || str == "cnuTrue") {
+                emit change_singup(str);
             }
             break;
         }
@@ -100,7 +115,7 @@ void MainWindow::slotReadyRead()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    sin_1.show();
+    sin_1->show();
     close();
 }
 

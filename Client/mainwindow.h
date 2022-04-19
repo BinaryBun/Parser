@@ -34,9 +34,13 @@ private:
     QString token;
 
     MainWin_1 form_1;
-    Singup sin_1;
+    Singup *sin_1 = new Singup();
 
 public slots:
+    void recieveData(QString login, QString passwd);
     void slotReadyRead();
+
+signals:
+    void change_singup(QString ans);
 };
 #endif // MAINWINDOW_H
