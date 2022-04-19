@@ -3,6 +3,7 @@
 
 static QString serv_addr = "127.0.0.1";
 const int serv_port = 2323;
+QString user_name;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
     connect(sin_1, SIGNAL(send_to_main(QString, QString)), this, SLOT(recieveData(QString, QString)));
     connect(this, SIGNAL(change_singup(QString)), sin_1, SLOT(read_answ(QString)));
+    connect(this, SIGNAL(set_user(QString)), form_1, SLOT(set_user(QString)));
     nextBlockSize = 0;
 
     socket->connectToHost(serv_addr, serv_port);
@@ -32,6 +34,7 @@ void MainWindow::on_pushButton_clicked()
 {
     // login
     QString login = ui->lineEdit_2->text();
+    user_name = login;
     QString password = md5(ui->lineEdit_3->text());
     qDebug() << (QString("You: \tPasswd: %1").arg(password));
     password = md5(this->token + password);
@@ -48,6 +51,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::SendToServer(QString str)
 {
+    emit set_user(user_name);  // эмитируем сигнал
     qDebug() << "send";
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
@@ -68,6 +72,7 @@ void MainWindow::recieveData(QString login, QString passwd)
 {
     // принимает данные с сигнала
     qDebug() << QString("Login: %1 -- Password: %2").arg(login, passwd);
+    user_name = login;
     // const_key + const_hash + login
     SendToServer("cnu"+passwd+login);
 
@@ -97,7 +102,7 @@ void MainWindow::slotReadyRead()
                 token = str.replace(0, 10, "");
                 qDebug() << QString("Token: %1").arg(token);
             } else if (str == "tlgTrue") {
-                form_1.show();
+                form_1->show();
                 close();
             } else if (str == "tlgFalse") {
                 // error

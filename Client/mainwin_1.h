@@ -15,6 +15,13 @@ public:
     explicit MainWin_1(QWidget *parent = nullptr);
     ~MainWin_1();
 
+public slots:
+    void set_user(QString user);
+
+private slots:
+    void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWin_1 *ui;
 };

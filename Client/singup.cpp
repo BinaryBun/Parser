@@ -29,7 +29,7 @@ void Singup::on_pushButton_clicked()
         QString password = md5(ui->lineEdit_2->text());
         emit send_to_main(login, password);
     } else {
-        ui->label_6->setText("Login incorrect");
+        ui->label_6->setText("Password incorrect");
         ui->label_6->setAlignment(Qt::AlignCenter);
         this->setFixedSize(QSize(321, 442));
     }

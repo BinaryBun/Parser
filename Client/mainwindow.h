@@ -33,8 +33,9 @@ private:
     quint16 nextBlockSize;
     QString token;
 
-    MainWin_1 form_1;
+    MainWin_1 *form_1 = new MainWin_1();
     Singup *sin_1 = new Singup();
+
 
 public slots:
     void recieveData(QString login, QString passwd);
@@ -42,5 +43,7 @@ public slots:
 
 signals:
     void change_singup(QString ans);
+    void set_user(QString user);
+
 };
 #endif // MAINWINDOW_H

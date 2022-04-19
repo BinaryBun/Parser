@@ -1,5 +1,6 @@
 // ==client ++==
 #include "mainwindow.h"
+#include "mainwin_1.h"
 #include <QApplication>
 #include <QFile>
 

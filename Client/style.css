@@ -7,8 +7,18 @@ QPushButton {
     color: white;
 }
 
+QMainWindow {
+    background: #0d1117;
+}
+
 QPushButton:hover {
     background-color: #56d364;
+}
+
+QGroupBox {
+     border-radius: 8px;
+     background: #161b22;
+     border: 1px solid #21262d;
 }
 
 QGroupBox#groupBox {
@@ -19,6 +29,7 @@ QGroupBox#groupBox {
 
 QGroupBox#groupBox_2 {
      border-radius: 8px;
+     background: #0d1117;
      border: 1px solid #30363d;
 }
 
@@ -26,6 +37,18 @@ QGroupBox#groupBox_3 {
      border-radius: 8px;
      background: #372327;
      border: 1px solid #853535;
+}
+
+QGroupBox#groupBox_2_1 {
+    background: #0d1117;
+    border-radius: 4px;
+    border: 1px solid #30363d;
+}
+
+QGroupBox#groupBox_3_1 {
+    background: #0d1117;
+    border-radius: 4px;
+    border: 1px solid #30363d;
 }
 
 QLineEdit {
@@ -37,10 +60,6 @@ QLineEdit {
 
 QLineEdit:focus  {
     border: 3px solid #0c2d6b;
-}
-
-QMainWindow {
-    background: #0d1117;
 }
 
 QFrom {
@@ -65,3 +84,6 @@ QLabel#label_6 {
     /*margin-left: 60%;*/
     font-size: 12pt;
 }
+
+
+
