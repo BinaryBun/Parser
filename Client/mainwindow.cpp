@@ -51,6 +51,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::SendToServer(QString str)
 {
+    qDebug() << user_name;
     emit set_user(user_name);  // эмитируем сигнал
     qDebug() << "send";
     Data.clear();
@@ -73,6 +74,7 @@ void MainWindow::recieveData(QString login, QString passwd)
     // принимает данные с сигнала
     qDebug() << QString("Login: %1 -- Password: %2").arg(login, passwd);
     user_name = login;
+    qDebug() << user_name;
     // const_key + const_hash + login
     SendToServer("cnu"+passwd+login);
 
@@ -107,8 +109,11 @@ void MainWindow::slotReadyRead()
             } else if (str == "tlgFalse") {
                 // error
                 this->setFixedSize(QSize(321, 452));
-            } else if (str == "cnuFalse" || str == "cnuTrue") {
+            } else if (str == "cnuFalse") {
                 emit change_singup(str);
+            } else if (str == "cnuTrue") {
+                emit change_singup(str);
+                form_1->show();
             }
             break;
         }

@@ -37,12 +37,11 @@ void Singup::on_pushButton_clicked()
 
 void Singup::read_answ(QString answer)
 {
-    if (answer == "cnuTrue") {
-        form_1.show();
-        close();
-    } else {
+    if (answer != "cnuTrue") {
         ui->label_6->setText("This user exists");
         ui->label_6->setAlignment(Qt::AlignCenter);
         this->setFixedSize(QSize(321, 442));
+    } else if (answer == "cnuTrue") {
+        close();
     }
 }
