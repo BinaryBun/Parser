@@ -30,14 +30,17 @@ void MainWin_1::set_user(QString user)
 
 void MainWin_1::on_pushButton_clicked()
 {
-    ui->label_5->setText("Error to pars");
-    this->setFixedSize(QSize(410, 302));
+    //qDebug() << ui->lineEdit_2->text();
+    emit send_from_user(ui->lineEdit_2->text());
+    ui->lineEdit_2->clear();
+    //ui->label_5->setText("Error to pars");
+    //this->setFixedSize(QSize(410, 302));
 }
 
 
 void MainWin_1::on_pushButton_2_clicked()
 {
-    ui->label_5->setText("Error to load");
+    ui->label_5->setText("Load from ssh!!!");
     this->setFixedSize(QSize(410, 302));
 }
 

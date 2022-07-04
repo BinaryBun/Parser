@@ -9,6 +9,8 @@
 #include <QSqlQuery>
 #include <QDataStream>
 #include <QString>
+#include <QProcess>
+#include <QDir>
 
 
 class Server : public QTcpServer  // main server class
@@ -20,15 +22,17 @@ public:
     QTcpSocket *socket;  // create socket
 
 private:
-    QString get_passwd(QString login);
+    QProcess *console_run;
     QVector <QTcpSocket*> Sockets;  // list of sockets
     QByteArray Data;  // array of sending data
-    void SendToClient(QString str);
     quint16 nextBlockSize;
-    QString get_token();
-    QString md5(QString str);
     QMap <qintptr, QString> tokens;
     QSqlDatabase db;
+
+    QString get_passwd(QString login);
+    void SendToClient(QString str);
+    QString get_token();
+    QString md5(QString str);
     bool is_not_login(QString login);
 
 

@@ -24,6 +24,10 @@ private slots:
 
 private:
     Ui::MainWin_1 *ui;
+
+signals:
+    void send_from_user(QString id);
+
 };
 
 #endif // MAINWIN_1_H

@@ -39,11 +39,12 @@ private:
 
 public slots:
     void recieveData(QString login, QString passwd);
+    void send_autor(QString id);
     void slotReadyRead();
 
 signals:
     void change_singup(QString ans);
-    void set_user(QString user);
+    void set_user_sig(QString user);
 
 };
 #endif // MAINWINDOW_H

@@ -15,9 +15,11 @@ MainWindow::MainWindow(QWidget *parent)
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::slotReadyRead);
     connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
+
     connect(sin_1, SIGNAL(send_to_main(QString, QString)), this, SLOT(recieveData(QString, QString)));
     connect(this, SIGNAL(change_singup(QString)), sin_1, SLOT(read_answ(QString)));
-    connect(this, SIGNAL(set_user(QString)), form_1, SLOT(set_user(QString)));
+    connect(this, SIGNAL(set_user_sig(QString)), form_1, SLOT(set_user(QString)));
+    connect(form_1, SIGNAL(send_from_user(QString)), this, SLOT(send_autor(QString)));
     nextBlockSize = 0;
 
     socket->connectToHost(serv_addr, serv_port);
@@ -52,7 +54,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::SendToServer(QString str)
 {
     qDebug() << user_name;
-    emit set_user(user_name);  // эмитируем сигнал
+    emit set_user_sig(user_name);  // эмитируем сигнал
     qDebug() << "send";
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
@@ -78,6 +80,12 @@ void MainWindow::recieveData(QString login, QString passwd)
     // const_key + const_hash + login
     SendToServer("cnu"+passwd+login);
 
+}
+
+void MainWindow::send_autor(QString id)
+{
+    qDebug() << "aut" + id;
+    SendToServer("aut" + id);
 }
 
 void MainWindow::slotReadyRead()

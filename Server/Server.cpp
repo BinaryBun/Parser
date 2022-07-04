@@ -62,14 +62,12 @@ QString Server::get_token() {
     return tmp_s;
 }
 
-QString Server::md5(QString str)
-{
+QString Server::md5(QString str) {
     QByteArray str_arr = str.toUtf8();
     return QString(QCryptographicHash::hash((str_arr),QCryptographicHash::Md5).toHex());
 }
 
-bool Server::is_not_login(QString login)
-{
+bool Server::is_not_login(QString login) {
     // connect 2 database
 
     db = QSqlDatabase::addDatabase("QMYSQL");
@@ -147,7 +145,12 @@ void Server::slotReadyRead() {
                 } else {
                     SendToClient("tlgFalse");
                 }
-
+            } else if (str.left(3) == "aut") {
+                str = str.right(str.length()-3);
+                // run py code
+                qDebug() << QDir::currentPath();
+                QString command = "python main.py " + str;
+                system(command.toLocal8Bit());
             } else {
                 SendToClient(QString("Message: %1").arg(str));
             }
