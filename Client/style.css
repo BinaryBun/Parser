@@ -1,0 +1,89 @@
+QPushButton {
+    /*&background-color: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                                      stop:1 #d53369, stop:0 #cbad6d);*/
+    background-color: #3fb950;
+    border-radius: 8px;
+    font-size: 10pt;
+    color: white;
+}
+
+QMainWindow {
+    background: #0d1117;
+}
+
+QPushButton:hover {
+    background-color: #56d364;
+}
+
+QGroupBox {
+     border-radius: 8px;
+     background: #161b22;
+     border: 1px solid #21262d;
+}
+
+QGroupBox#groupBox {
+     border-radius: 8px;
+     background: #161b22;
+     border: 1px solid #21262d;
+}
+
+QGroupBox#groupBox_2 {
+     border-radius: 8px;
+     background: #0d1117;
+     border: 1px solid #30363d;
+}
+
+QGroupBox#groupBox_3 {
+     border-radius: 8px;
+     background: #372327;
+     border: 1px solid #853535;
+}
+
+QGroupBox#groupBox_2_1 {
+    background: #0d1117;
+    border-radius: 4px;
+    border: 1px solid #30363d;
+}
+
+QGroupBox#groupBox_3_1 {
+    background: #0d1117;
+    border-radius: 4px;
+    border: 1px solid #30363d;
+}
+
+QLineEdit {
+    color: white;
+    border-radius: 4px;
+    border: 0px;
+    background: #0d1117;
+}
+
+QLineEdit:focus  {
+    border: 3px solid #0c2d6b;
+}
+
+QFrom {
+    background: #0d1117;
+}
+
+QLabel{
+    color: white;
+    font-size: 10pt;
+}
+
+QLabel#label_3 {
+    font-size: 14pt;
+}
+
+QLabel#label_5 {
+    margin-left: 20%;
+    font-size: 12pt;
+}
+
+QLabel#label_6 {
+    /*margin-left: 60%;*/
+    font-size: 12pt;
+}
+
+
+
