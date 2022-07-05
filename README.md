@@ -4,9 +4,8 @@
 
 
 # Над проектом работали #
-
-
-Чибышев Максим Александрович | https://github.com/BinaryBun <br>Главный разработчик, автор проекта <br>Telegram: @binarybun
+ФИО | Регалии
 -- | --
-__Падева Татьяна Владимировна__ | __https://github.com/TatyanaPad <br>Дизайнер интерфейса <br>Telegram: @eminence_grise1__
-__Широков Матвей__ | __https://github.com/thelightline <br>Документовед, разработчик <br>Mail: thelightlineoflife@yandex.ru__
+Чибышев Максим Александрович | https://github.com/BinaryBun <br>Главный разработчик, автор проекта <br>Telegram: @binarybun
+Падева Татьяна Владимировна | https://github.com/TatyanaPad <br>Дизайнер интерфейса <br>Telegram: @eminence_grise1
+Широков Матвей | __https://github.com/thelightline <br>Документовед, разработчик <br>Mail: thelightlineoflife@yandex.ru
