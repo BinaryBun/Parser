@@ -13,13 +13,16 @@ Server::Server() {
 
 QString Server::get_passwd(QString login) {
     // connect 2 database
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("passwd.db");
+
+    /*db.setHostName("127.0.0.1");
     db.setDatabaseName("parser");
     db.setUserName("root");
-    db.setPassword("binarybun");
+    db.setPassword("binarybun");*/
     // try open
     if (!db.open()) {
+        qDebug() << "DBError";
         qDebug() << db.lastError().text();
     } else {
         //qDebug() << "Connect";
@@ -70,13 +73,16 @@ QString Server::md5(QString str) {
 bool Server::is_not_login(QString login) {
     // connect 2 database
 
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("127.0.0.1");
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("passwd.db");
+
+    /*db.setHostName("127.0.0.1");
     db.setDatabaseName("parser");
     db.setUserName("root");
-    db.setPassword("binarybun");
+    db.setPassword("binarybun");*/
     // try open
     if (!db.open()) {
+        qDebug() << "DBError";
         qDebug() << db.lastError().text();
     } else {
         //qDebug() << "Connect";
@@ -119,13 +125,16 @@ void Server::slotReadyRead() {
                 QString login = str.right(str.length()-3-32);
                 qDebug() << passwd << ' ' << login;
                 if (is_not_login(login)) {
-                    db = QSqlDatabase::addDatabase("QMYSQL");
-                    db.setHostName("127.0.0.1");
+                    db = QSqlDatabase::addDatabase("QSQLITE");
+                    db.setDatabaseName("passwd.db");
+
+                    /*db.setHostName("127.0.0.1");
                     db.setDatabaseName("parser");
                     db.setUserName("root");
-                    db.setPassword("binarybun");
+                    db.setPassword("binarybun");*/
                     // try open
                     if (!db.open()) {
+                        qDebug() << "DBError";
                         qDebug() << db.lastError().text();
                     } else {
                         //qDebug() << "Connect";
@@ -149,7 +158,7 @@ void Server::slotReadyRead() {
                 str = str.right(str.length()-3);
                 // run py code
                 qDebug() << QDir::currentPath();
-                QString command = "python main.py " + str;
+                QString command = "python3 main.py " + str;
                 system(command.toLocal8Bit());
             } else {
                 SendToClient(QString("Message: %1").arg(str));

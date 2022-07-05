@@ -24,6 +24,7 @@ def main():
 
         with open("jog.txt", 'a', encoding='utf-8') as f:
             f.write(f"{autorId} | {lastName} | {firstName} | {secondName} | {city} | {orgName} | {link}\n")
+            print(f"{autorId} | {lastName} | {firstName} | {secondName} | {city} | {orgName} | {link}\n")
     except:
         print("error")
 
