@@ -1,12 +1,16 @@
+'''
+    Testing the parsing function for the validity of the result
+    https://github.com/BinaryBun/Parser/blob/43ec7ee9d54a75477ead2ccfb6820ac8612f639b/Server%20(Docker)/main.py#L6
+'''
 import sys
 import requests
 from bs4 import BeautifulSoup
 
 
-def main():
-    print("start parser")
+def main(id):
+    #print("start parser")
     try:
-        id = sys.argv[1]
+        # id = sys.argv[1]
         code = "bb036e49-cf01-4846-9206-ba5baf479927"
         url = f"http://elibrary.ru/projects/API-NEB/API_NEB.aspx?ucode={code}&sid=024&authorid={id}"
         data = requests.get(url)
@@ -24,9 +28,18 @@ def main():
 
         with open("jog.txt", 'a', encoding='utf-8') as f:
             f.write(f"{autorId} | {lastName} | {firstName} | {secondName} | {city} | {orgName} | {link}\n")
-            print(f"{autorId} | {lastName} | {firstName} | {secondName} | {city} | {orgName} | {link}\n")
-    except:
-        print("error")
+            #print(f"{autorId} | {lastName} | {firstName} | {secondName} | {city} | {orgName} | {link}\n")
+
+    except Exception as e:
+        return f"Error: {e}"
+
+    return True
+
+def tests():
+    print(main(23))     # True
+    print(main(26))     # True
+    print(main(1134))   # True
+    print(main(-12))    # Error: 'NoneType' object has no attribute 'text'
 
 if __name__ == '__main__':
-    main()
+    tests()
